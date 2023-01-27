@@ -1,0 +1,31 @@
+.formConteiner {
+  p {
+    margin-bottom: 10px;
+  }
+  label {
+    font-size: 16px;
+  }
+  input,
+  select {
+    border: none;
+    padding: 10px 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  button {
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-weight: bolder;
+    background: #fff;
+    box-shadow: 2px 2px 5px #d9d9d9, 2px 2px 5px #ffffff;
+    border-radius: 100px;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 20px auto;
+}

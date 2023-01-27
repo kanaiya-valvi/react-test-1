@@ -1,0 +1,15 @@
+.questionList {
+  h3 {
+    margin: 20px 0;
+  }
+  &__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    li {
+      padding: 10px 5px;
+      border: 1px solid;
+      border-radius: 8px;
+    }
+  }
+}
