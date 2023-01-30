@@ -1,5 +1,5 @@
 import "./InputForm.scss";
-import { useContext,useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Appcontext } from "../Store/Store";
 import { useNavigate } from "react-router";
 function Form() {
@@ -63,6 +63,7 @@ function Form() {
               <label htmlFor="category">Select Category:</label>
             </p>
             <select id="category" ref={cat}>
+              <option value="">any category</option>
               {category?.trivia_categories?.map((list, move) => (
                 <option value={list.id} key={move}>
                   {list.name}
@@ -77,7 +78,7 @@ function Form() {
             </p>
             <select id="difficulty" ref={difficulty}>
               <option value="">Any Difficulty</option>
-              <option value="easy">Easy</option>
+              <option value="easys">Easy</option>
               <option value="medium">Medium</option>
               <option value="Hard">Hard</option>
             </select>

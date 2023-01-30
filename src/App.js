@@ -7,7 +7,7 @@ import Store from "./Store/Store";
 
 function App() {
   return (
-    <div className="container">      
+    <div className="container">
       <Store>
         <Routes>
           <Route path="/" element={<Home />}></Route>

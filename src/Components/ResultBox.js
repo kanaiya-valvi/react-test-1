@@ -1,13 +1,23 @@
-import React from "react";
 import "./ResultBox.scss";
 
+import { useContext } from "react";
+import { Appcontext } from "../Store/Store";
+
 function ResultBox() {
+  const { intialiState, restart, newqustion } = useContext(Appcontext);
+
   return (
     <div className="result">
-      <h1>8/10</h1>
+      <h1>
+        {intialiState.currAnswer}/{intialiState?.questions?.length}
+      </h1>
       <div className="result__btn">
-        <button className="result__btn--restart">Restart</button>
-        <button className="result__btn--new">New Questions</button>
+        <button className="result__btn--restart" onClick={restart}>
+          Restart
+        </button>
+        <button className="result__btn--new" onClick={newqustion}>
+          New Questions
+        </button>
       </div>
     </div>
   );
