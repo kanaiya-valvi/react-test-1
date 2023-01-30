@@ -1,13 +1,28 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useReducer, useState } from "react";
+import reducer from "./reducer";
 
 export const Appcontext = createContext();
 
 const intialiState = {
   questions: [],
+  currIndex: 0,
 };
 
 const Store = ({ children }) => {
   const [data, setData] = useState([]);
+  const [state, dispatch] = useReducer(reducer, intialiState);
+  const prev = () => {
+    return dispatch({
+      type: "PREV",
+      payload: { value: (intialiState.currIndex -= 1) },
+    });
+  };
+  const next = () => {
+    return dispatch({
+      type: "NEXT",
+      payload: { value: (intialiState.currIndex += 1) },
+    });
+  };
 
   const startHandler = async (amount, category, difficulty, type) => {
     const url = `https://opentdb.com/api.php?amount=${
@@ -24,7 +39,8 @@ const Store = ({ children }) => {
   };
 
   return (
-    <Appcontext.Provider value={{ intialiState, startHandler, data }}>
+    <Appcontext.Provider
+      value={{ intialiState, startHandler, data, prev, next }}>
       {children}
     </Appcontext.Provider>
   );
