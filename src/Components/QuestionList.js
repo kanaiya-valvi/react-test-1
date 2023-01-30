@@ -21,7 +21,7 @@ const QuestionList = () => {
             {[
               ...curQuestion?.incorrect_answers,
               curQuestion?.correct_answer,
-            ].map((res, val) => (
+            ].sort().map((res, val) => (
               <li key={val}>
                 {val + 1} ). {res}
               </li>
