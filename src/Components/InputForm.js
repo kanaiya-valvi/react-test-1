@@ -1,7 +1,6 @@
 import "./InputForm.scss";
-import { useEffect, useRef, useState } from "react";
+import { useContext,useEffect, useRef, useState } from "react";
 import { Appcontext } from "../Store/Store";
-import { useContext } from "react";
 import { useNavigate } from "react-router";
 function Form() {
   const [category, setCategory] = useState([]);

@@ -8,12 +8,25 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  -moz-osx-font-smoothing: grayscale; 
   background-color: #ffffff;
 }
 ul {
   list-style-type: none;
+}
+
+.btn {
+  border: none;
+  padding: 10px 30px;
+  font-weight: bolder;
+  background: #96f2d7;
+  transition: all 0.4s;
+  color:#000000;
+  border-radius: 4px;
+  @media (max-width: 768px) {
+    width:100%;    
+  }
+  &:hover {
+    background: #38d9a9;
+  }
 }

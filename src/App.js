@@ -7,8 +7,7 @@ import Store from "./Store/Store";
 
 function App() {
   return (
-    <>
-      <h1>startting page</h1>
+    <div className="container">      
       <Store>
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -16,7 +15,7 @@ function App() {
           <Route path="/result" element={<Result />}></Route>
         </Routes>
       </Store>
-    </>
+    </div>
   );
 }
 

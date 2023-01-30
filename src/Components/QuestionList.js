@@ -10,6 +10,7 @@ const QuestionList = () => {
     setCurQuestion(intialiState?.questions.results[intialiState.currIndex]);
   }, [intialiState.questions.results, intialiState.currIndex, curQuestion]);
   const currindex = intialiState.currIndex;
+
   return (
     <>
       {curQuestion && curQuestion?.length !== 0 && (
@@ -18,25 +19,24 @@ const QuestionList = () => {
             {currindex + 1} ) {curQuestion.question}
           </h3>
           <ul className="questionList__options">
-            {[
-              ...curQuestion?.incorrect_answers,
-              curQuestion?.correct_answer,
-            ].sort().map((res, val) => (
-              <li key={val}>
-                {val + 1} ). {res}
-              </li>
-            ))}
+            {[...curQuestion?.incorrect_answers, curQuestion?.correct_answer]
+              .sort()
+              .map((res, val) => (
+                <li key={val}>
+                  {val + 1} ). {res}
+                </li>
+              ))}
           </ul>
         </div>
       )}
-      <div className="">
+      <div className="actions">
         {currindex !== 0 && (
-          <button className="" onClick={prev}>
+          <button className="btn" onClick={prev}>
             Previous
           </button>
         )}
-        {currindex < intialiState.questions.results.length-1 && (
-          <button className="" onClick={next}>
+        {currindex < intialiState?.questions?.results?.length - 1 && (
+          <button className="btn" onClick={next}>
             Next
           </button>
         )}
