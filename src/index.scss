@@ -31,20 +31,16 @@ ul {
   }
 }
 .btn-cancel {
-  border: none;
   padding: 10px 30px;
   font-weight: bolder;
-  background: #96f2d7;
+  border: 1px solid rgb(255, 55, 55);
   transition: all 0.4s;
   color: #000000;
   border-radius: 4px;
-
   width: min-content;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  background: rgb(255, 55, 55);
   &:hover {
-    background: #38d9a9;
+    background-color: rgba(255, 0, 0, 0.628);
   }
 }
 

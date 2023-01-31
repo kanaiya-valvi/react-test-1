@@ -21,10 +21,12 @@ const Store = ({ children }) => {
     }));
   const navigation = useNavigate();
   const prev = () => {
-    return dispatch({
-      type: "PREV",
-      payload: { ...state, currIndex: (intialiState.currIndex -= 1) },
-    });
+    if (intialiState.currIndex !== 0) {
+      return dispatch({
+        type: "PREV",
+        payload: { ...state, currIndex: (intialiState.currIndex -= 1) },
+      });
+    }
   };
   const next = () => {
     return dispatch({

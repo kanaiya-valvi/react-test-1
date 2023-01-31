@@ -2,6 +2,9 @@ import "./InputForm.scss";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Appcontext } from "../Store/Store";
 import { useNavigate } from "react-router";
+
+import Loader from "../UI/Loader";
+
 function Form() {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,7 +27,7 @@ function Form() {
       setLoading(false);
     };
     fetchCat(category);
-  }, []);
+  }, [setLoading]);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -43,9 +46,10 @@ function Form() {
 
   return (
     <>
-      {loading && <p className="loading">Loading....</p>}
+      {loading && <Loader />}
       {!loading && (
         <form onSubmit={submitHandler} className="formConteiner">
+          <h2>Select</h2>
           {/* number of Question */}
           <div>
             <p>

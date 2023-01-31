@@ -2,21 +2,28 @@ import "./QuestionList.scss";
 import React, { useContext, useEffect, useState } from "react";
 import { Appcontext } from "../Store/Store";
 import { useNavigate } from "react-router";
+import Loader from "../UI/Loader";
 const QuestionList = () => {
   const { intialiState, prev, next, currectAns } = useContext(Appcontext);
   const [curQuestion, setCurQuestion] = useState([]);
   const [check, setCheck] = useState(false);
   const navigat = useNavigate();
   const sortState = intialiState.questions;
+  const [loading, isLoading] = useState(false);
 
   useEffect(() => {
+    if (sortState.length == 0) {
+      isLoading(true);
+    } else {
+      isLoading(false);
+    }
     setCurQuestion(sortState[intialiState.currIndex]);
-
     curQuestion?.selected &&
     curQuestion?.user_answer !== curQuestion?.correct_answer
       ? setCheck(true)
       : setCheck(false);
   }, [
+    loading,
     check,
     sortState,
     intialiState.currIndex,
@@ -44,7 +51,9 @@ const QuestionList = () => {
 
   return (
     <>
-      {curQuestion && curQuestion?.length !== 0 && (
+      {loading && <Loader />}
+      {/* {curQuestion && curQuestion?.length !== 0 && ( */}
+      {!loading && curQuestion && curQuestion?.length !== 0 && (
         <div className="questionList">
           <h3>
             {currindex + 1} ){" "}
@@ -84,11 +93,10 @@ const QuestionList = () => {
         </div>
       )}
       <div className="actions">
-        {currindex !== 0 && (
-          <button className="btn" onClick={prev}>
-            Previous
-          </button>
-        )}
+        <button className="btn" onClick={prev}>
+          Previous
+        </button>
+
         {currindex < sortState?.length - 1 && (
           <button className="btn" onClick={next}>
             Next

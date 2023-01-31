@@ -1,0 +1,65 @@
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.box {
+  display: flex;
+  gap: 10px;
+}
+.dot {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+}
+.dot-1 {
+  background-color: #3edaac;
+  animation: dot1 1s 0.4s infinite alternate;
+}
+.dot-2 {
+  background-color: #69e2be;
+  animation: dot2 1s 0.6s infinite alternate;
+}
+.dot-3 {
+  background-color: #94ebd1;
+  animation: dot3 1s 0.8s infinite alternate;
+}
+.dot-4 {
+  background-color: #bff3e3;
+  animation: dot4 1s 1s infinite alternate;
+}
+
+@keyframes dot2 {
+  to {
+    transform: translateY(-20px);
+  }
+  from {
+    transform: translateY(0);
+  }
+}
+@keyframes dot1 {
+  to {
+    transform: translateY(-20px);
+  }
+  from {
+    transform: translateY(0);
+  }
+}
+@keyframes dot3 {
+  to {
+    transform: translateY(-20px);
+  }
+  from {
+    transform: translateY(0);
+  }
+}
+@keyframes dot4 {
+  to {
+    transform: translateY(-20px);
+  }
+  from {
+    transform: translateY(0);
+  }
+}
