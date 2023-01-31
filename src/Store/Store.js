@@ -5,7 +5,6 @@ import reducer from "./reducer";
 export const Appcontext = createContext();
 const intialiState = {
   questions: [],
-  userTrach: [],
   currIndex: 0,
   currAnswer: 0,
 };
@@ -14,6 +13,12 @@ const Store = ({ children }) => {
   const [data, setData] = useState([]);
   const [state, dispatch] = useReducer(reducer, intialiState);
 
+  const getQuestion = () =>
+    intialiState.questions.map((question) => ({
+      question: question.question,
+      correct_answer: question.correct_answer,
+      incorrect_answers: question.incorrect_answers,
+    }));
   const navigation = useNavigate();
   const prev = () => {
     return dispatch({
@@ -34,24 +39,26 @@ const Store = ({ children }) => {
     });
   };
   const restart = () => {
+    const newQuestion = getQuestion();
     navigation("/quese");
     return dispatch({
       type: "RESTART",
       payload: {
         ...state,
         currIndex: (intialiState.currIndex = 0),
-        userTrach: (intialiState.userTrach = intialiState.questions),
+        questions: (intialiState.questions = newQuestion),
+        currAnswer: (intialiState.currAnswer = 0),
       },
     });
   };
   const newqustion = () => {
-    startHandler();
-    navigation("/quese");
+    navigation("/");
     return dispatch({
       type: "NEWQUESTION",
       payload: {
         ...state,
         value: (intialiState.currIndex = 0),
+        currAnswer: (intialiState.currAnswer = 0),
       },
     });
   };
@@ -71,7 +78,7 @@ const Store = ({ children }) => {
     if (difficulty) BASE_URL = `${BASE_URL}&dificulty=${difficulty}`;
     if (type) BASE_URL = `${BASE_URL}&type=${type}`;
 
-    console.log(BASE_URL);
+    // console.log(BASE_URL);
 
     const result = await fetch(BASE_URL);
     const data = await result.json();

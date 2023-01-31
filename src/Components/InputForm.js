@@ -39,6 +39,8 @@ function Form() {
     }, 1000);
   };
 
+  const amountOfQuese = [10, 15, 20, 25, 30, 35, 40, 45, 50];
+
   return (
     <>
       {loading && <p className="loading">Loading....</p>}
@@ -49,13 +51,14 @@ function Form() {
             <p>
               <label htmlFor="NumberOfQuestions">Number of Questions</label>
             </p>
-            <input
-              type="number"
-              defaultValue="10"
-              max="50"
-              min="10"
-              ref={numOfQue}
-            />
+            <select ref={numOfQue}>
+              {amountOfQuese.map((num) => (
+                <option value={num} key={num}>
+                  {num}
+                </option>
+              ))}
+            </select>
+            {/* <input type="number" defaultValue="10" max="50" min="10" /> */}
           </div>
           {/* Category */}
           <div>

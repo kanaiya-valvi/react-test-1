@@ -1,6 +1,5 @@
 import "./QuestionList.scss";
-
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Appcontext } from "../Store/Store";
 import { useNavigate } from "react-router";
 const QuestionList = () => {
@@ -10,11 +9,10 @@ const QuestionList = () => {
   const navigat = useNavigate();
   const sortState = intialiState.questions;
 
-
   useEffect(() => {
     setCurQuestion(sortState[intialiState.currIndex]);
 
-    curQuestion.selected &&
+    curQuestion?.selected &&
     curQuestion?.user_answer !== curQuestion?.correct_answer
       ? setCheck(true)
       : setCheck(false);
@@ -33,7 +31,6 @@ const QuestionList = () => {
 
       curQuestion.user_answer = currvalue;
       curQuestion.selected = true;
-
       if (currvalue === currAnswer) {
         event.target.classList.add("correct");
         currectAns();
@@ -42,8 +39,6 @@ const QuestionList = () => {
         event.target.classList.add("wrong");
         setCheck(true);
       }
-    } else {
-      alert("Question selected");
     }
   };
 
@@ -52,7 +47,9 @@ const QuestionList = () => {
       {curQuestion && curQuestion?.length !== 0 && (
         <div className="questionList">
           <h3>
-            {currindex + 1} ) {curQuestion.question}
+            {currindex + 1} ){" "}
+            <span
+              dangerouslySetInnerHTML={{ __html: curQuestion.question }}></span>
           </h3>
           <div className="questionList__options">
             {[...curQuestion?.incorrect_answers, curQuestion?.correct_answer]

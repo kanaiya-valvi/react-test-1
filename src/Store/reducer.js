@@ -10,10 +10,15 @@ const reducer = (state, action) => {
       return {
         ...state,
         currIndex: action.payload.currIndex,
-        userTrach: action.payload.userTrach,
+        questions: action.payload.questions,
+        currAnswer: action.payload.currAnswer,
       };
     case "NEWQUESTION":
-      return { ...state, currIndex: action.payload.currIndex };
+      return {
+        ...state,
+        currIndex: action.payload.currIndex,
+        currAnswer: action.payload.currAnswer,
+      };
     default:
       return { ...state };
   }

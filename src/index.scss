@@ -30,6 +30,23 @@ ul {
     background: #38d9a9;
   }
 }
+.btn-cancel {
+  border: none;
+  padding: 10px 30px;
+  font-weight: bolder;
+  background: #96f2d7;
+  transition: all 0.4s;
+  color: #000000;
+  border-radius: 4px;
+
+  width: min-content;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  &:hover {
+    background: #38d9a9;
+  }
+}
 
 .option {
   border: 1px solid #38d9a9;
@@ -40,7 +57,7 @@ ul {
   text-align: left;
 }
 .correct {
-  border: 2px solid #38d9a9;
+  box-shadow: 0 0 0 2px #38d9a9;
   background-color: #38d9a92e;
   text-align: left;
 }
@@ -53,7 +70,8 @@ ul {
   transition: all 0.4s;
 }
 .wrong {
-  border: 2px solid red;
+  border-color: red;
+  box-shadow: 0 0 0 2px red;
   background-color: rgba(255, 0, 0, 0.225);
   text-align: left;
 }
