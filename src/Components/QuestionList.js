@@ -5,31 +5,24 @@ import { useNavigate } from "react-router";
 import Loader from "../UI/Loader";
 const QuestionList = () => {
   const { intialiState, prev, next, currectAns } = useContext(Appcontext);
-  const [curQuestion, setCurQuestion] = useState([]);
+  const [curQuestion, setCurQuestion] = useState("");
   const [check, setCheck] = useState(false);
   const navigat = useNavigate();
   const sortState = intialiState.questions;
   const [loading, isLoading] = useState(false);
 
   useEffect(() => {
-    if (sortState.length == 0) {
-      isLoading(true);
-    } else {
-      isLoading(false);
-    }
     setCurQuestion(sortState[intialiState.currIndex]);
     curQuestion?.selected &&
     curQuestion?.user_answer !== curQuestion?.correct_answer
       ? setCheck(true)
       : setCheck(false);
-  }, [
-    loading,
-    check,
-    sortState,
-    intialiState.currIndex,
-    curQuestion,
-    curQuestion.user_answer,
-  ]);
+    if (!curQuestion) {
+      isLoading(true);
+    } else {
+      isLoading(false);
+    }
+  }, [loading, intialiState.currIndex, curQuestion, sortState]);
   const currindex = intialiState.currIndex;
   const ansHandler = (event) => {
     if (!curQuestion.selected) {
@@ -51,6 +44,9 @@ const QuestionList = () => {
 
   return (
     <>
+      {loading && (
+        <h1 className="error">Something is wrong!!! Click to Cancel Button.</h1>
+      )}
       {loading && <Loader />}
       {/* {curQuestion && curQuestion?.length !== 0 && ( */}
       {!loading && curQuestion && curQuestion?.length !== 0 && (
@@ -93,9 +89,11 @@ const QuestionList = () => {
         </div>
       )}
       <div className="actions">
-        <button className="btn" onClick={prev}>
-          Previous
-        </button>
+        {!loading && (
+          <button className="btn" onClick={prev}>
+            Previous
+          </button>
+        )}
 
         {currindex < sortState?.length - 1 && (
           <button className="btn" onClick={next}>
