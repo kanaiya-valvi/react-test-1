@@ -6,7 +6,7 @@ const Quese = () => {
   return (
     <Card>
       <div>
-        <CancelButton />
+        <CancelButton content="Cancel" />
         <QuestionList />
       </div>
     </Card>
