@@ -70,7 +70,7 @@ function Form() {
               <label htmlFor="category">Select Category:</label>
             </p>
             <select id="category" ref={cat}>
-              <option value="">any category</option>
+              <option value="">Any category</option>
               {category?.trivia_categories?.map((list, move) => (
                 <option value={list.id} key={move}>
                   {list.name}
