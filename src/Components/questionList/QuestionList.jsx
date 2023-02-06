@@ -1,8 +1,9 @@
-import "./QuestionList.scss";
 import React, { useContext, useEffect, useState } from "react";
-import { Appcontext } from "../Store/Store";
 import { useNavigate } from "react-router";
-import Loader from "../UI/Loader";
+import { Appcontext } from "../../Store/Store";
+import Loader from "../../UI/Loader";
+import style from "./QuestionList.module.scss";
+
 const QuestionList = () => {
   const { intialiState, prev, next, currectAns } = useContext(Appcontext);
   const [curQuestion, setCurQuestion] = useState("");
@@ -45,18 +46,19 @@ const QuestionList = () => {
   return (
     <>
       {loading && (
-        <h1 className="error">Something is wrong!!! Click to Cancel Button.</h1>
+        <h1 className={style.error}>
+          Something is wrong!!! Click to Cancel Button.
+        </h1>
       )}
       {loading && <Loader />}
-      {/* {curQuestion && curQuestion?.length !== 0 && ( */}
       {!loading && curQuestion && curQuestion?.length !== 0 && (
-        <div className="questionList">
+        <div className={style.questionList}>
           <h3>
             {currindex + 1} ){" "}
             <span
               dangerouslySetInnerHTML={{ __html: curQuestion.question }}></span>
           </h3>
-          <div className="questionList__options">
+          <div className={style.questionList__options}>
             {[...curQuestion?.incorrect_answers, curQuestion?.correct_answer]
               .sort()
               .map((res, val) => (
@@ -65,14 +67,14 @@ const QuestionList = () => {
                     curQuestion.selected &&
                     curQuestion?.user_answer !== curQuestion?.correct_answer &&
                     curQuestion?.user_answer === res
-                      ? "option wrong"
-                      : "option" &&
+                      ? `${style.option} ${style.wrong}`
+                      : `${style.option}` &&
                         curQuestion?.selected &&
                         curQuestion?.user_answer ===
                           curQuestion?.correct_answer &&
                         curQuestion?.user_answer === res
-                      ? "option correct"
-                      : "option"
+                      ? `${style.option} ${style.correct}`
+                      : `${style.option}`
                   }
                   key={currindex + val.toString()}
                   onClick={ansHandler}
@@ -82,26 +84,26 @@ const QuestionList = () => {
               ))}
           </div>
           {check && (
-            <div className="right_and">
+            <div className={style.right_and}>
               <p>{curQuestion?.correct_answer}</p>
             </div>
           )}
         </div>
       )}
-      <div className="actions">
+      <div className={style.actions}>
         {!loading && (
-          <button className="btn" onClick={prev}>
+          <button className={style.btn} onClick={prev}>
             Previous
           </button>
         )}
 
         {currindex < sortState?.length - 1 && (
-          <button className="btn" onClick={next}>
+          <button className={style.btn} onClick={next}>
             Next
           </button>
         )}
         {currindex === sortState?.length - 1 && (
-          <button className="btn" onClick={() => navigat("/result")}>
+          <button className={style.btn} onClick={() => navigat("/result")}>
             Result
           </button>
         )}

@@ -1,18 +1,18 @@
-import "./InputForm.scss";
-import { useContext, useEffect, useRef, useState } from "react";
-import { Appcontext } from "../Store/Store";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-
-import Loader from "../UI/Loader";
+import { Appcontext } from "../../Store/Store";
+import Loader from "../../UI/Loader";
+import styles from "./InputForm.module.scss";
+import Option from "./Option";
 
 function Form() {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const numOfQue = useRef();
-  const cat = useRef();
-  const type = useRef();
-  const difficulty = useRef();
+  const [numOfQue, setNumOfQue] = useState();
+  const [cat, setCat] = useState();
+  const [type, setType] = useState();
+  const [difficulty, setDifficulty] = useState();
 
   const postCtx = useContext(Appcontext);
 
@@ -27,49 +27,56 @@ function Form() {
       setLoading(false);
     };
     fetchCat(category);
-  }, [setLoading]);
+  }, [setLoading, category]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    postCtx.startHandler(
-      numOfQue.current.value,
-      cat.current.value,
-      difficulty.current.value,
-      type.current.value
-    );
+    postCtx.startHandler(numOfQue, cat, difficulty, type);
     setTimeout(() => {
       navigate("./quese");
     }, 1000);
   };
-
   const amountOfQuese = [10, 15, 20, 25, 30, 35, 40, 45, 50];
+  const difficultyList = [
+    { text: "Any Difficulty", value: "" },
+    { text: "Easy", vlaue: "easy" },
+    { text: "Medium", value: "medium" },
+    { text: "Hard", value: "hard" },
+  ];
+  const typeList = [
+    { text: "Any Any", value: "" },
+    { text: "Multiple", value: "multiple" },
+    { text: "true/false", value: "boolean" },
+  ];
 
   return (
     <>
       {loading && <Loader />}
       {!loading && (
-        <form onSubmit={submitHandler} className="formConteiner">
+        <form onSubmit={submitHandler} className={styles.formConteiner}>
           <h2>Select</h2>
           {/* number of Question */}
           <div>
             <p>
               <label htmlFor="NumberOfQuestions">Number of Questions</label>
             </p>
-            <select ref={numOfQue}>
+            <select
+              onChange={(event) => {
+                setNumOfQue(event.target.value);
+              }}>
               {amountOfQuese.map((num) => (
                 <option value={num} key={num}>
                   {num}
                 </option>
               ))}
-            </select>
-            {/* <input type="number" defaultValue="10" max="50" min="10" /> */}
+            </select>            
           </div>
           {/* Category */}
           <div>
             <p>
               <label htmlFor="category">Select Category:</label>
             </p>
-            <select id="category" ref={cat}>
+            <select id="category" onChange={(e) => setCat(e.target.value)}>
               <option value="">Any category</option>
               {category?.trivia_categories?.map((list, move) => (
                 <option value={list.id} key={move}>
@@ -83,11 +90,10 @@ function Form() {
             <p>
               <label htmlFor="difficulty">Select Difficulty:</label>
             </p>
-            <select id="difficulty" ref={difficulty}>
-              <option value="">Any Difficulty</option>
-              <option value="easys">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="Hard">Hard</option>
+            <select
+              id="difficulty"
+              onChange={(e) => setDifficulty(e.target.value)}>
+              <Option list={difficultyList} />
             </select>
           </div>
           {/* type */}
@@ -95,10 +101,8 @@ function Form() {
             <p>
               <label htmlFor="type">Select Type:</label>
             </p>
-            <select id="type" ref={type}>
-              <option value="">Any Type</option>
-              <option value="multiple">multiple</option>
-              <option value="boolean">true/false</option>
+            <select id="type" onChange={(e) => setType(e.target.value)}>
+              <Option list={typeList} />
             </select>
           </div>
           <button>Submit</button>
