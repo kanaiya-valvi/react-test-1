@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "../UI/Card";
-import ResultBox from "../Components/ResultBox";
+import ResultBox from "../Components/resultBox/ResultBox";
 
-function Result() {
+function Result() {  
   return (
     <Card>
       <ResultBox />
