@@ -24,6 +24,7 @@ function Form() {
       const res = await fetch("https://opentdb.com/api_category.php");
       const data = await res.json();
       setCategory(data);
+      console.log("setCategory");
       setLoading(false);
     };
     fetchCat(category);
@@ -78,7 +79,7 @@ function Form() {
             </p>
             <select id="category" onChange={(e) => setCat(e.target.value)}>
               <option value="">Any category</option>
-              {category?.trivia_categories?.map((list, move) => (
+              {category.trivia_categories?.map((list, move) => (
                 <option value={list.id} key={move}>
                   {list.name}
                 </option>
