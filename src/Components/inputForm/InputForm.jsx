@@ -69,7 +69,7 @@ function Form() {
                   {num}
                 </option>
               ))}
-            </select>            
+            </select>
           </div>
           {/* Category */}
           <div>
