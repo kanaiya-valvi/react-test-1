@@ -27,7 +27,7 @@ function Form() {
       setLoading(false);
     };
     fetchCat(category);
-  }, [setLoading, category]);
+  }, [setLoading]);
 
   const submitHandler = (event) => {
     event.preventDefault();
