@@ -24,7 +24,6 @@ function Form() {
       const res = await fetch("https://opentdb.com/api_category.php");
       const data = await res.json();
       setCategory(data);
-      console.log("setCategory");
       setLoading(false);
     };
     fetchCat(category);
